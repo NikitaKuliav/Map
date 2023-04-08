@@ -1,6 +1,7 @@
 package Transport;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Bus extends Transport<DriverD> implements Diagnosticable {
@@ -85,5 +86,19 @@ public class Bus extends Transport<DriverD> implements Diagnosticable {
             throw new DiagnosticNotAllowedException();
         } else System.out.println("Диагностика пройдена успешно");
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Bus bus = (Bus) o;
+        return size == bus.size && type == bus.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), size, type);
     }
 }

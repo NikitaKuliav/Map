@@ -1,8 +1,6 @@
 import Transport.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args){
@@ -55,6 +53,8 @@ public class Main {
             transportList.add(auto);
             transportList.add(truck);
             transportList.add(bus);
+            Mechanic gusev = new Mechanic("Гусев Матвей", "Moll");
+            auto.addMechanic(gusev);
 
 //            printInfo(auto);
 //            printInfo(bus);
@@ -149,6 +149,16 @@ public class Main {
 
 
 //          ikarus.printType();
+
+        Map<Transport<?>, List<Mechanic>> map = new HashMap<>();
+        for (Transport <?> transport : transportList
+             ) {
+            map.put(transport, transport.getMechanics());
+        }
+        map.entrySet()
+                .forEach((entry) -> System.out.println(entry.getKey() + " : " + entry.getValue()));
+
+
 
 
     }
