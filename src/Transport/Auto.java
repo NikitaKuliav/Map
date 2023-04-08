@@ -1,6 +1,7 @@
 package Transport;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Auto extends Transport<DriverB> implements Diagnosticable {
     private BodyType bodyType;
@@ -72,5 +73,19 @@ public class Auto extends Transport<DriverB> implements Diagnosticable {
     @Override
     public void passDiagnostic(){
         System.out.println("Диагностика пройдена успешно");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Auto auto = (Auto) o;
+        return bodyType == auto.bodyType && type == auto.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), bodyType, type);
     }
 }

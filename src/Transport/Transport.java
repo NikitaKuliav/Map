@@ -3,6 +3,7 @@ package Transport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Transport<T extends Driver> implements Competing {
     private final String brand;
@@ -160,5 +161,18 @@ public abstract class Transport<T extends Driver> implements Competing {
                         ", модель='" + model + '\'' +
                         ", объем двигателя=" + engineVolume;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transport<?> transport = (Transport<?>) o;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && gasTankBar == transport.gasTankBar && oilTankBar == transport.oilTankBar && brand.equals(transport.brand) && model.equals(transport.model) && driver.equals(transport.driver) && mechanics.equals(transport.mechanics);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model, engineVolume, driver, gasTankBar, oilTankBar, mechanics);
     }
 }
